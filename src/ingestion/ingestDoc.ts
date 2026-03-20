@@ -35,7 +35,7 @@ export const storeChunksInDataChunks = async (rawChunks: string[], source: strin
         text: chunk,
         source,
     }));
-    const outputPath = 'src/data/chunks.json';
+    const outputPath = path.join(__dirname, '../data/chunks.json');
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
     fs.writeFileSync(outputPath, JSON.stringify(chunks, null, 2));
     console.log('[ingest] Chunks saved to', outputPath);
@@ -43,7 +43,7 @@ export const storeChunksInDataChunks = async (rawChunks: string[], source: strin
 
 export const ingestDoc = async () => {
     console.log('[ingest] Starting ingestDoc');
-    const filePath = '/Users/bhagyashreerao/Desktop/AI Projects/ask-my-docs-rag/src/data/Consumer_Handbook.pdf';
+    const filePath = path.join(__dirname, '../data/Consumer_Handbook.pdf');
     const doc = await extractText(filePath);
     console.log('[ingest] Dividing into chunks...');
     const rawChunks = await divideDocIntoChunks(doc);

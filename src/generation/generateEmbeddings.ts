@@ -30,11 +30,11 @@ export const generateEmbeddings = async () => {
     }
     try {
         const responses = await Promise.all(coherePromises);
-        const embeddings = responses.map((response) => response.embeddings);
+        const allEmbeddings = responses.flatMap((response) => response.embeddings as number[][]);
 
         const chunksWithEmbeddings = chunks.map((chunk: { id: number; text: string; source: string }, i: number) => ({
             ...chunk,
-            embedding: (embeddings as number[][])[i],
+            embedding: allEmbeddings[i],
         }));
 
         const outputPath = path.join(__dirname, '../data/chunks-with-embeddings.json');

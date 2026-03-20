@@ -18,6 +18,11 @@ router.get('/check-token', async (req, res) => {
     }
 });
 
+router.post('/injestAndEmbed', (req, res) => {
+    console.log('[routes] POST /injestAndEmbed - entering handler');
+    apiController.injestAndEmbed(req, res);
+});
+
 router.post('/ask', (req, res) => {
     console.log('[routes] POST /ask - entering handler');
     apiController.askQuestion(req, res);
